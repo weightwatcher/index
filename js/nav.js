@@ -8,8 +8,7 @@ nav.innerHTML = `
         <li class="nav-item"> <a class="nav-link" href="yearly.html"><i class="fa-solid fa-trophy"></i></a></li>
         <li class="nav-item"> <a class="nav-link" href="weight.html"><i class="fa fa-weight"></i></a></li>
 		<li class="nav-item"> <a class="nav-link" href="Boosters.html"><i class="fa fa-rocket"></i></a></li>
-        <li class="nav-item"> <a class="nav-link" href="https://peterwgood.github.io/quiz/"><i class="fas fa-question-circle"></i></a></li>
-        <li class="nav-item"> <a class="nav-link" href="https://www.meta.ai/"><i class="fa-brands fa-meta"></i></a></li>
+       
       
       </ul>
     </div>
