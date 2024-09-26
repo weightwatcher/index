@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Editor</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.0.0/ckeditor5.css">
+	
+	<style>
+		.ck-editor__editable {
+    min-height: 400px;
+}
+		
+	</style>
+	
+</head>
+<body>
+<div class="nav-container"></div>
+	<div class="container mt-4">
+  <h1 class="text-center mt-4 form-control" contenteditable="true">To-Do-List</h1>
+</div>
+<script src="nav.js"></script>
+<div class="container mt-4">
+  <div class="main-container mt-4">
+    <div id="editor">
+      <p></p>
+    </div>
+    <div class="d-grid gap-2 my-3">
+      <button id="reset-button" class="btn btn-primary mt-4">Reset</button>
+    </div>
+  </div>
+</div>
+<script type="importmap">
+            {
+                "imports": {
+                    "ckeditor5": "https://cdn.ckeditor.com/ckeditor5/43.0.0/ckeditor5.js",
+                    "ckeditor5/": "https://cdn.ckeditor.com/ckeditor5/43.0.0/"
+                }
+            }
+        </script> 
+<script type="module">
+   import {
+    ClassicEditor,
+    Essentials,
+    Paragraph,
+	   HorizontalLine,
+    Bold,
+    Italic,
+    Font,
+    FontSize,
+    FontFamily,
+    FontColor,
+    FontBackgroundColor,
+    Alignment,
+    Link,
+    List,
+    Image,
+    ImageUpload,
+    BlockQuote,
+    Heading,
+    Highlight,
+    Strikethrough,
+    SourceEditing,
+    Underline,
+    Table,
+    TableToolbar,
+	TableColumnResize,
+	TableProperties, 
+	TableCellProperties,
+    DragDrop,
+	TodoList,
+   SelectAll
+	   
+  
+   
+   
+    
+} from 'https://cdn.ckeditor.com/ckeditor5/43.0.0/ckeditor5.js';
+
+    ClassicEditor
+        .create(document.querySelector('#editor'), {
+		
+            plugins: [
+                Essentials,
+                Paragraph,
+                Bold,
+                Italic,
+                Font,
+                FontSize,
+            	SourceEditing,
+                FontColor,
+          HorizontalLine,
+                Alignment,
+               
+                List,
+               TodoList,
+                Heading,
+                Highlight,
+                Strikethrough,
+                Underline,
+                Table,
+                TableToolbar,
+				DragDrop,
+				 TableColumnResize,TableProperties, TableCellProperties
+           
+            
+				
+            ],
+            toolbar: [
+                'undo', 'redo','|',
+			
+				'SelectAll','|',
+				'horizontalLine',
+				'heading','|',
+				
+            ],
+            table: {
+                contentToolbar: [
+                    'tableColumn',
+                    'tableRow',
+                    'mergeTableCells',
+                    'tableCellProperties',
+                    'tableProperties'
+                ]
+            }
+        })
+	
+	
+	 
+	
+	
+        .then(editor => {
+            window.editor = editor;
+
+            // Save editor content to local storage on change
+            editor.model.document.on('change', () => {
+                const content = editor.getData();
+                localStorage.setItem('editorContent', content);
+            });
+
+            // Load saved content from local storage on initialization
+            const savedContent = localStorage.getItem('editorContent');
+            if (savedContent) {
+                editor.setData(savedContent);
+            }
+
+            // Add event listener to reset button
+            document.getElementById('reset-button').addEventListener('click', () => {
+                editor.setData('');
+                localStorage.removeItem('editorContent');
+            });
+        })         .catch(error => {
+            console.error(error);
+        });
+</script> 
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> 
+<script src="js/nav.js"></script> 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
